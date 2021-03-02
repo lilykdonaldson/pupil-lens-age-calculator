@@ -12,6 +12,23 @@
   </style>
   </head>
   <body oncontextmenu="return false;">
+    <label for="illuminanceLevel">Illuminance Level</label>
+    <input id ="illuminanceLevel"></input>
+  </br>
+    <label for="age">Age</label>
+    <input id ="age"></input>
+  </br>
+    <label for="fixedPupilDiameter">Fixed Pupil Diameter</label>
+    <input id ="fixedPupilDiameter"></input>
+  </br>
+    <label for="spectrumChoice">Spectrum</label>
+    <select name="spectrumChoice" id="spectrumChoice">
+      <option value="mySpectrum">My Spectrum (enter below)</option>
+      <option value="exampleSpectrum1">Exp 1</option>
+      <option value="exampleSpectrum2">Exp 2</option>
+      <option value="exampleSpectrum3">Exp 3</option>
+    </select>
+  </br>
     <textarea id="userSPDEnter" cols="40" rows="10"></textarea>
     <button onclick="buttonClicked()">Compute</button>
     <p id = "results"></p>

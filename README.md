@@ -1,6 +1,6 @@
 # pupil-lens-age-calculator
 ## To do list
-* inputs Illuminance Level, Age, Pupil Diameter
+* use inputs
 * outputs Table Output, 2 graphs
 * interpolation spd user input
 * example spds
