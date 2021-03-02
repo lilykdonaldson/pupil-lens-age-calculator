@@ -1,3 +1,20 @@
+/*
+JS code is based off paper "Calculation of Visual and Circadian Response to Light Spectral Distribution" (Zhang, 2009)
+with aim to estimate the effects of age and pupil size on the spectral distribution of light reaching the eye using 
+several recent pupil size estimation models including the Rea and Ouellette modified De Groot Model and Berman's Model.  
+
+-----INPUTS------
+○ 400-700 UserSPD / comma delimited to JSlibrary
+○ Illuminance Level (lux) / float
+○ Age / int
+○ Pupil Diameter (fixed pupil size mode) / float
+-----OUTPUTS-----
+○ Pupil Diameter (Berman Model) / float
+○ Pupil Diameter (Rea Model) / float
+○ Table Output: Wavelength, Radiation, Transmittance, Ratio to 20yr&2mm, Radiation at retina / dom table
+○ Graph Human Lens Transmittance / chart.js
+○ Graph SPD reaching the eye and retina / chart.js
+*/
 var userSpectrum = {400:2,410:2,420:2,430:2,440:2,450:3,460:2,470:4,480:44.0955,490:2,500:59.807,510:1,520:63.9805,530:21,540:260.4295,550:83.4465,560:1,570:124.674,580:121.221,590:221.04,600:301.424,610:2,620:148.5985,630:117.543,640:100.4425,650:92.1615,660:94.376,670:84.31,680:72.869,690:54.5005,700:43.578};
 var photopicEfficacy = [0.271833952,0.830603742,2.745797495,7.962812736,15.7883356,26.0850762,41.18696243,62.45316403,95.43019194,142.7951987,221.7231477,345.284035,487.3790554,591.7193602,654.8727026,682.9828731,683.0171269,653.4998038,597.2109552,519.642176,433.1495549,345.284035,261.5372114,181.9090841,120.1286404,73.45008299,41.8734118,21.96637996,11.66963935,5.635749359,2.815815331];
 var scotopicEfficacy = [15.67070882,58.76937515,162.9483823,337.0298839,553.4509755,767.5104964,956.4361571,1140.301309,1337.661151,1524.899975,1656.473203,1681.775747,1577.191899,1368.024204,1096.443566,811.3682391,554.6317609,350.1872067,204.4445542,110.4877748,55.91862188,26.87130156,12.43198321,5.625598913,2.525193875,1.141988145,0.527811064,0.249651766,0.120608792,0.059595925,0.030025685];
