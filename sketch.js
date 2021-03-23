@@ -120,3 +120,6 @@ function csvJSON(csv){
   return result;
 }
 
+function printClicked(){
+	window.print();
+}
