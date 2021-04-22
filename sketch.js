@@ -39,15 +39,9 @@ var BermanModel;
 var scotopicSum;
 var photopicSum;
 var spRatio;
-
-
 function setup() {
-
 }
-
 function draw() {
- 
-
 }
 function log10 (x) {
   return (log(x) / log(10));
@@ -88,7 +82,6 @@ function buttonClicked(){
 	else if(spectrumChoice=="metalhalide"){
 		userSpectrum=metalhalide;
 	}
-	//fix user spectrum
 	SPcalculations = [
 		[400,0.000396078,userSpectrum["400"]*0.000396078/1000*10,photopicEfficacy[0]*userSpectrum["400"]/1000,scotopicEfficacy[0]*userSpectrum["400"]/1000],
 		[410,0.001210239,userSpectrum["410"]*0.001210239/1000*10,photopicEfficacy[1]*userSpectrum["410"]/1000,scotopicEfficacy[1]*userSpectrum["410"]/1000],
@@ -133,7 +126,7 @@ function buttonClicked(){
 	  photopicSum += SPcalculations[i][3];
 	}
 	spRatio = scotopicSum/photopicSum;
-		luminance = illuminanceLevel/PI;
+	luminance = illuminanceLevel/PI;
 	var logA =3.36-0.31*log(luminance*pow(spRatio,0.78)); 
 	var A = exp(logA);
 	BermanModel =sqrt(A/PI)*2;
@@ -141,8 +134,25 @@ function buttonClicked(){
 	document.getElementById("results").innerHTML = "Rea/Ouellette: "+ReaOuelletteModifiedDeGroot.toFixed(2)+"\n"+"Berman Model: "+BermanModel.toFixed(2);
 
 	//pupil size interpolation
-	//FIX THIS
+	var modelChoice = document.getElementById("modelChoice").value;
+	if(modelChoice=="rea"){
+
+	}
+	else if(modelChoice=="berman"){
+		
+	}
+	else if(modelChoice=="fixed"){
+		var fixedPupilSize = modelChoice = document.getElementById("fixedPupilDiameter").value;
+	}
+
+
+	
 	var transmittancePer = [0.125892541,0.221060154,0.316227766,0.420517613,0.52480746,0.543574393,0.562341325,0.58,0.594506597,0.604078303,0.62,0.621828875,0.630007741,0.637722327,0.644972633,0.65,0.658080405,0.663937871,0.669331057,0.674259963,0.68,0.682724935,0.686261001,0.689332787,0.691940293,0.694083519,0.695762465,0.696977131,0.697727517,0.698013623,0.7];
+	
+
+
+
+
 	var wavelengthSpectrum = [400,410,420,430,440,450,460,470,480,490,500,510,520,530,540,550,560,570,580,590,600,610,620,630,640,650,660,670,680,690,700];
 	var valuesSpectrumReachingEye = [userSpectrum["400"],userSpectrum["410"],userSpectrum["420"],userSpectrum["430"],userSpectrum["440"],userSpectrum["450"],userSpectrum["460"],userSpectrum["470"],userSpectrum["480"],userSpectrum["490"],userSpectrum["500"],userSpectrum["510"],userSpectrum["520"],userSpectrum["530"],userSpectrum["540"],userSpectrum["550"],userSpectrum["560"],userSpectrum["570"],userSpectrum["580"],userSpectrum["590"],userSpectrum["600"],userSpectrum["610"],userSpectrum["620"],userSpectrum["630"],userSpectrum["640"],userSpectrum["650"],userSpectrum["660"],userSpectrum["670"],userSpectrum["680"],userSpectrum["690"],userSpectrum["700"]];
 	var valuesSpectrumReachingRetina = valuesSpectrumReachingEye.map(function(x, index){
@@ -171,7 +181,7 @@ function buttonClicked(){
 	  }
 	});
 	var lensSpec = [400,410,420,430,440,450,460,470,480,490,500,510,520,530,540,550,560,570,580,590,600,610,620,630,640,650,660,670,680,690,700];
-	var lensValues = [0.125892541,0.221060154,0.316227766,0.420517613,0.52480746,0.543574393,0.562341325,0.58,0.594506597,0.604078303,0.62,0.621828875,0.630007741,0.637722327,0.644972633,0.65,0.658080405,0.663937871,0.669331057,0.674259963,0.68,0.682724935,0.686261001,0.689332787,0.691940293,0.694083519,0.695762465,0.696977131,0.697727517,0.698013623,0.7];
+	var lensValues = transmittancePer;
 	var ctx2 = document.getElementById('humanLensChart').getContext('2d');
 	var humanLensChart = new Chart(ctx2, {
 	  type: 'line',
@@ -186,13 +196,6 @@ function buttonClicked(){
 	    ]
 	  }
 	});
-
-
-
-
-
-
-
 
 }
 

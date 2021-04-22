@@ -22,6 +22,14 @@
   </br>
     <label for="fixedPupilDiameter">Fixed Pupil Diameter</label>
     <input id ="fixedPupilDiameter"></input>
+        </select>
+    </br>
+    <label for="modelChoice">Which model should the graphs use?</label>
+    <select name="modelChoice" id="modelChoice">
+      <option value="rea">Rea/Ouellette</option>
+      <option value="berman">Berman Model</option>
+      <option value="fixed">Fixed Pupil Diameter</option>
+    </select>
   </br>
     <label for="spectrumChoice">Spectrum</label>
     <select name="spectrumChoice" id="spectrumChoice">
@@ -35,14 +43,13 @@
       <option value="led6800">LED 6800K</option>
       <option value="metalhalide">Metal Halide</option>
       <option value="mySpectrum">My Spectrum (enter below)</option>
-      
     </select>
   </br>
     <textarea id="userSPDEnter" cols="40" rows="10"></textarea>
     <button onclick="buttonClicked()">Compute</button>
     <p id = "results"></p>
   </br>
-  <button onclick="printClicked()">Print Page</button>
+  <!--<button onclick="printClicked()">Print Page</button>-->
     </canvas><canvas id="spectrumChart"></canvas>
   </canvas><canvas id="humanLensChart"></canvas>
     <script src="charts.js"></script>
