@@ -174,8 +174,7 @@ function buttonClicked(){
 
 
 
-
-	var transmittancePer = [0.125892541,0.221060154,0.316227766,0.420517613,0.52480746,0.543574393,0.562341325,0.58,0.594506597,0.604078303,0.62,0.621828875,0.630007741,0.637722327,0.644972633,0.65,0.658080405,0.663937871,0.669331057,0.674259963,0.68,0.682724935,0.686261001,0.689332787,0.691940293,0.694083519,0.695762465,0.696977131,0.697727517,0.698013623,0.7];
+	//var transmittancePer = [0.125892541,0.221060154,0.316227766,0.420517613,0.52480746,0.543574393,0.562341325,0.58,0.594506597,0.604078303,0.62,0.621828875,0.630007741,0.637722327,0.644972633,0.65,0.658080405,0.663937871,0.669331057,0.674259963,0.68,0.682724935,0.686261001,0.689332787,0.691940293,0.694083519,0.695762465,0.696977131,0.697727517,0.698013623,0.7];
 	
 	var age = document.getElementById("age").value;
 	var interpolation0 = [];
@@ -221,6 +220,35 @@ function buttonClicked(){
 		}
 	}
 
+	var transmittancePer = [];
+	if(pupilSize>=0&&pupilSize<2){
+		for(i=0;i<interpolation0.length;i++){
+			transmittancePer.push((interpolation0[i]+(interpolation2[i]-interpolation0[i])/2*(pupilSize-0))/100);
+		}
+	}
+	else if(pupilSize>=2&&pupilSize<4){
+		for(i=0;i<interpolation0.length;i++){
+			transmittancePer.push((interpolation2[i]+(interpolation4[i]-interpolation2[i])/2*(pupilSize-0))/100);
+		}
+	}
+	else if(pupilSize>=4&&pupilSize<6){
+		for(i=0;i<interpolation0.length;i++){
+			transmittancePer.push((interpolation4[i]+(interpolation6[i]-interpolation4[i])/2*(pupilSize-0))/100);
+		}
+	}
+	else if(pupilSize>=6&&pupilSize<8){
+		for(i=0;i<interpolation0.length;i++){
+			transmittancePer.push((interpolation6[i]+(interpolation8[i]-interpolation6[i])/2*(pupilSize-0))/100);
+		}
+	}
+	else if(pupilSize>=8){
+		for(i=0;i<interpolation0.length;i++){
+			transmittancePer.push(interpolation8[i]/100);
+		}
+
+	}
+	console.log(transmittancePer);
+
 	var wavelengthSpectrum = [400,410,420,430,440,450,460,470,480,490,500,510,520,530,540,550,560,570,580,590,600,610,620,630,640,650,660,670,680,690,700];
 	var valuesSpectrumReachingEye = [userSpectrum["400"],userSpectrum["410"],userSpectrum["420"],userSpectrum["430"],userSpectrum["440"],userSpectrum["450"],userSpectrum["460"],userSpectrum["470"],userSpectrum["480"],userSpectrum["490"],userSpectrum["500"],userSpectrum["510"],userSpectrum["520"],userSpectrum["530"],userSpectrum["540"],userSpectrum["550"],userSpectrum["560"],userSpectrum["570"],userSpectrum["580"],userSpectrum["590"],userSpectrum["600"],userSpectrum["610"],userSpectrum["620"],userSpectrum["630"],userSpectrum["640"],userSpectrum["650"],userSpectrum["660"],userSpectrum["670"],userSpectrum["680"],userSpectrum["690"],userSpectrum["700"]];
 	var valuesSpectrumReachingRetina = valuesSpectrumReachingEye.map(function(x, index){
@@ -249,7 +277,6 @@ function buttonClicked(){
 	  }
 	});
 	var lensSpec = [400,410,420,430,440,450,460,470,480,490,500,510,520,530,540,550,560,570,580,590,600,610,620,630,640,650,660,670,680,690,700];
-	var lensValues = transmittancePer;
 	var ctx2 = document.getElementById('humanLensChart').getContext('2d');
 	var humanLensChart = new Chart(ctx2, {
 	  type: 'line',
@@ -258,7 +285,7 @@ function buttonClicked(){
 	    datasets: [{
 	      fill: false,
 	      label: 'Human Lens Transmittance',
-	      data: lensValues,
+	      data: transmittancePer,
 	      borderColor: "rgba(252, 186, 3,1)"
 	    }
 	    ]
