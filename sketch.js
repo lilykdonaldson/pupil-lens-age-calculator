@@ -54,6 +54,9 @@ var eightyPupilSize4 = [0.126,1.319,2.512,4.796,7.079,9.150,11.220,25.000,28.569
 var eightyPupilSize6 = [0.200,1.681,3.162,6.037,8.913,11.519,14.125,25.000,28.569,31.772,35.000,37.730,40.486,43.093,45.551,48.000,50.021,52.033,53.897,55.611,57.500,58.594,59.862,60.981,61.952,62.774,63.447,63.971,64.347,64.574,65.000];
 var eightyPupilSize8 = [0.562,2.272,3.981,7.601,11.220,14.501,17.783,25.000,28.569,31.772,35.000,37.730,40.486,43.093,45.551,48.000,50.021,52.033,53.897,55.611,57.500,58.594,59.862,60.981,61.952,62.774,63.447,63.971,64.347,64.574,65.000];
 
+var wavelengthSpectrum;
+var valuesSpectrumReachingRetina;
+
 //wavelength,Vlamda,SPDxVlamda,PhotopicSPD,ScotopicSPD
 var SPcalculations;
 var illuminanceLevel;
@@ -248,9 +251,9 @@ function buttonClicked(){
 
 	}
 
-	var wavelengthSpectrum = [400,410,420,430,440,450,460,470,480,490,500,510,520,530,540,550,560,570,580,590,600,610,620,630,640,650,660,670,680,690,700];
+	wavelengthSpectrum = [400,410,420,430,440,450,460,470,480,490,500,510,520,530,540,550,560,570,580,590,600,610,620,630,640,650,660,670,680,690,700];
 	var valuesSpectrumReachingEye = [userSpectrum["400"],userSpectrum["410"],userSpectrum["420"],userSpectrum["430"],userSpectrum["440"],userSpectrum["450"],userSpectrum["460"],userSpectrum["470"],userSpectrum["480"],userSpectrum["490"],userSpectrum["500"],userSpectrum["510"],userSpectrum["520"],userSpectrum["530"],userSpectrum["540"],userSpectrum["550"],userSpectrum["560"],userSpectrum["570"],userSpectrum["580"],userSpectrum["590"],userSpectrum["600"],userSpectrum["610"],userSpectrum["620"],userSpectrum["630"],userSpectrum["640"],userSpectrum["650"],userSpectrum["660"],userSpectrum["670"],userSpectrum["680"],userSpectrum["690"],userSpectrum["700"]];
-	var valuesSpectrumReachingRetina = valuesSpectrumReachingEye.map(function(x, index){
+	valuesSpectrumReachingRetina = valuesSpectrumReachingEye.map(function(x, index){
  		return transmittancePer[index] * x 
 	});
 
@@ -305,4 +308,16 @@ function csvJSON(csv){
 
 function printClicked(){
 	window.print();
+}
+function exportRetinaSPD(){
+	const rows = [
+    	wavelengthSpectrum,
+		valuesSpectrumReachingRetina
+	];
+
+	let csvContent = "data:text/csv;charset=utf-8," 
+    	+ rows.map(e => e.join(",")).join("\n");
+    console.log(csvContent);
+
+
 }
