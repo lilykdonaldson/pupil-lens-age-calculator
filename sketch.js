@@ -77,8 +77,7 @@ function buttonClicked(){
 	var spectrumChoice = document.getElementById("spectrumChoice").value;
 	if(spectrumChoice=="mySpectrum"){
 		userSpectrumText = document.getElementById("userSPDEnter").value;
-
-	userSpectrum = csvJSON(userSpectrumText);
+		userSpectrum = csvJSON(userSpectrumText);
 		}
 	else if(spectrumChoice=="incandescent"){
 		userSpectrum = incandescent;
@@ -155,6 +154,7 @@ function buttonClicked(){
 	var logA =3.36-0.31*log(luminance*pow(spRatio,0.78)); 
 	var A = exp(logA);
 	BermanModel =sqrt(A/PI)*2;
+	
 	ReaOuelletteModifiedDeGroot = 4.77-2.44*tan(0.3*log10(luminance))
 	document.getElementById("results").innerHTML = "Rea/Ouellette: "+ReaOuelletteModifiedDeGroot.toFixed(2)+"\n"+"Berman Model: "+BermanModel.toFixed(2);
 
@@ -247,7 +247,6 @@ function buttonClicked(){
 		}
 
 	}
-	console.log(transmittancePer);
 
 	var wavelengthSpectrum = [400,410,420,430,440,450,460,470,480,490,500,510,520,530,540,550,560,570,580,590,600,610,620,630,640,650,660,670,680,690,700];
 	var valuesSpectrumReachingEye = [userSpectrum["400"],userSpectrum["410"],userSpectrum["420"],userSpectrum["430"],userSpectrum["440"],userSpectrum["450"],userSpectrum["460"],userSpectrum["470"],userSpectrum["480"],userSpectrum["490"],userSpectrum["500"],userSpectrum["510"],userSpectrum["520"],userSpectrum["530"],userSpectrum["540"],userSpectrum["550"],userSpectrum["560"],userSpectrum["570"],userSpectrum["580"],userSpectrum["590"],userSpectrum["600"],userSpectrum["610"],userSpectrum["620"],userSpectrum["630"],userSpectrum["640"],userSpectrum["650"],userSpectrum["660"],userSpectrum["670"],userSpectrum["680"],userSpectrum["690"],userSpectrum["700"]];
