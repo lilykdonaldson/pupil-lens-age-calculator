@@ -76,7 +76,6 @@ function log10 (x) {
 }
 
 function buttonClicked(){
-   document.getElementById("buttonFriends").innerHTML = '<button onclick="printClicked()">Print Page</button><button onclick="exportRetinaSPD()">Export SPD Reaching Retina</button>';
 	illuminanceLevel = document.getElementById("illuminanceLevel").value;
 	var spectrumChoice = document.getElementById("spectrumChoice").value;
 	if(spectrumChoice=="mySpectrum"){
@@ -288,6 +287,8 @@ function buttonClicked(){
 	    ]
 	  }
 	});
+	 document.getElementById("buttonFriends").innerHTML = '<button onclick="printClicked()">Print Page</button><button onclick="exportRetinaSPD()">Export SPD Reaching Retina</button>';
+
 
 }
 
