@@ -76,6 +76,7 @@ function log10 (x) {
 }
 
 function buttonClicked(){
+   document.getElementById("buttonFriends").innerHTML = '<button onclick="printClicked()">Print Page</button><button onclick="exportRetinaSPD()">Export SPD Reaching Retina</button>';
 	illuminanceLevel = document.getElementById("illuminanceLevel").value;
 	var spectrumChoice = document.getElementById("spectrumChoice").value;
 	if(spectrumChoice=="mySpectrum"){
@@ -172,12 +173,6 @@ function buttonClicked(){
 	else if(modelChoice=="fixed"){
 		var pupilSize = document.getElementById("fixedPupilDiameter").value;
 	}
-
-
-
-
-
-	//var transmittancePer = [0.125892541,0.221060154,0.316227766,0.420517613,0.52480746,0.543574393,0.562341325,0.58,0.594506597,0.604078303,0.62,0.621828875,0.630007741,0.637722327,0.644972633,0.65,0.658080405,0.663937871,0.669331057,0.674259963,0.68,0.682724935,0.686261001,0.689332787,0.691940293,0.694083519,0.695762465,0.696977131,0.697727517,0.698013623,0.7];
 	
 	var age = document.getElementById("age").value;
 	var interpolation0 = [];
@@ -307,17 +302,32 @@ function csvJSON(csv){
 }
 
 function printClicked(){
+	document.getElementById("buttonFriends").innerHTML = '';
+	document.getElementById("textboxFriend").innerHTML = '';
 	window.print();
+	document.getElementById("buttonFriends").innerHTML = '<button onclick="printClicked()">Print Page</button><button onclick="exportRetinaSPD()">Export SPD Reaching Retina</button>';
+	document.getElementById("textboxFriend").innerHTML ='<textarea id="userSPDEnter" cols="40" rows="10"></textarea><button onclick="buttonClicked()">Compute</button>';
 }
 function exportRetinaSPD(){
-	const rows = [
-    	wavelengthSpectrum,
-		valuesSpectrumReachingRetina
-	];
+	var newRetArr = [["Wavelength (nm)","Power"]];
+	var innerRetArr =[];
+	for(var i=0;i<wavelengthSpectrum.length;i++){
+		innerRetArr.push(wavelengthSpectrum[i]);
+		innerRetArr.push(valuesSpectrumReachingRetina[i]);
+		newRetArr.push(innerRetArr);
+		innerRetArr = [];
+	}
+
 
 	let csvContent = "data:text/csv;charset=utf-8," 
-    	+ rows.map(e => e.join(",")).join("\n");
-    console.log(csvContent);
+    	+ newRetArr.map(e => e.join(",")).join("\n");
+	var encodedUri = encodeURI(csvContent);
+	var link = document.createElement("a");
+	link.setAttribute("href", encodedUri);
+	link.setAttribute("download", "spd_reaching_the_retina.csv");
+	document.body.appendChild(link); 
+
+	link.click();
 
 
 }

@@ -11,6 +11,7 @@
   <style> body {padding: 0; margin: 50px;} 
   table {border-collapse: collapse;}
   td, th {border: 1px solid #7D7C7C; text-align: left; padding: 8px;background-color: #dddddd;}
+  .imchart {width: 200;height:400}
   </style>
   </head>
   <body oncontextmenu="return false;">
@@ -45,14 +46,17 @@
       <option value="mySpectrum">My Spectrum (enter below)</option>
     </select>
   </br>
+    <div id = 'textboxFriend'>
     <textarea id="userSPDEnter" cols="40" rows="10"></textarea>
     <button onclick="buttonClicked()">Compute</button>
+  </div>
     <p id = "results"></p>
-  </br>
-  <button onclick="printClicked()">Print Page</button>
-  <button onclick="exportRetinaSPD()">Export SPD Reaching Retina</button>
-    </canvas><canvas id="spectrumChart"></canvas>
-  </canvas><canvas id="humanLensChart"></canvas>
+  <div id="buttonFriends">
+  </div>
+  <div class="chart-container" style="position: relative; height:30vh; width:50vw">
+   <canvas id="spectrumChart"></canvas>
+   <canvas id="humanLensChart"></canvas>
+  </div>
     <script src="charts.js"></script>
   </body>
   </html>
